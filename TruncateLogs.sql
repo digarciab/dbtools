@@ -29,9 +29,9 @@ SET @SQL = 'USE [' + @DatabaseNameParam + ']; ' +
            'FROM INFORMATION_SCHEMA.TABLES t ' +
            'JOIN INFORMATION_SCHEMA.COLUMNS c ON t.TABLE_SCHEMA = c.TABLE_SCHEMA AND t.TABLE_NAME = c.TABLE_NAME ' +
            'WHERE COLUMNPROPERTY(object_id(t.TABLE_SCHEMA + ''.'' + t.TABLE_NAME), c.COLUMN_NAME, ''IsIdentity'') = 1 ' +
-           'AND EXISTS (SELECT 1 FROM dbatools.dbo.TableSearch ' +
-           'WHERE dbatools.dbo.TableSearch.TableSchema COLLATE DATABASE_DEFAULT = t.TABLE_SCHEMA COLLATE DATABASE_DEFAULT ' +
-           'AND dbatools.dbo.TableSearch.TableName COLLATE DATABASE_DEFAULT = t.TABLE_NAME COLLATE DATABASE_DEFAULT);';
+           'AND EXISTS (SELECT 1 FROM dbtools.dbo.TableSearch ' +
+           'WHERE dbtools.dbo.TableSearch.TableSchema COLLATE DATABASE_DEFAULT = t.TABLE_SCHEMA COLLATE DATABASE_DEFAULT ' +
+           'AND dbtools.dbo.TableSearch.TableName COLLATE DATABASE_DEFAULT = t.TABLE_NAME COLLATE DATABASE_DEFAULT);';
 
 -- Ejecutar la consulta para llenar la tabla temporal
 EXEC sp_executesql @SQL;

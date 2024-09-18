@@ -63,10 +63,10 @@ SET @sql = 'RESTORE FILELISTONLY FROM DISK = ''' + @BackupFile + '''';
 INSERT INTO @FileList
 EXEC(@sql);
 
--- Verificar si la base de datos dbatools existe
-IF NOT EXISTS (SELECT 1 FROM sys.databases WHERE name = 'dbatools')
+-- Verificar si la base de datos dbtools existe
+IF NOT EXISTS (SELECT 1 FROM sys.databases WHERE name = 'dbtools')
 BEGIN
-    RAISERROR('No existe la BD dbatools que es el template para la ubicación de archivos', 16, 1);
+    RAISERROR('No existe la BD dbtools que es el template para la ubicación de archivos', 16, 1);
     RETURN;
 END
 
@@ -77,14 +77,14 @@ SELECT @moveSQL = @moveSQL +
         WHEN [Type] = 'D' THEN 
             'MOVE ''' + LogicalName + ''' TO ''' + 
             LEFT(
-                (SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbatools') AND type_desc = 'ROWS'),
-                LEN((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbatools') AND type_desc = 'ROWS'))+1 - CHARINDEX('\', REVERSE((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbatools') AND type_desc = 'ROWS')))
+                (SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbtools') AND type_desc = 'ROWS'),
+                LEN((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbtools') AND type_desc = 'ROWS'))+1 - CHARINDEX('\', REVERSE((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbtools') AND type_desc = 'ROWS')))
             ) + REPLACE(LogicalName, @PrefijoOrigen, @PrefijoDestino) + @SufijoDestino + '.mdf'', '
         WHEN [Type] = 'L' THEN 
             'MOVE ''' + LogicalName + ''' TO ''' + 
             LEFT(
-                (SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbatools') AND type_desc = 'LOG'),
-                LEN((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbatools') AND type_desc = 'LOG')) +1 - CHARINDEX('\', REVERSE((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbatools') AND type_desc = 'LOG')))
+                (SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbtools') AND type_desc = 'LOG'),
+                LEN((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbtools') AND type_desc = 'LOG')) +1 - CHARINDEX('\', REVERSE((SELECT physical_name FROM sys.master_files WHERE database_id = DB_ID('dbtools') AND type_desc = 'LOG')))
             ) + REPLACE(LogicalName, @PrefijoOrigen, @PrefijoDestino) + @SufijoDestino + '.ldf'', '
     END
 FROM @FileList;

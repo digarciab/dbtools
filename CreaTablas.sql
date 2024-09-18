@@ -1,4 +1,4 @@
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[UserPermissions](
@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[UserPermissions](
 ) ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[RegisteredDatabases](
@@ -27,7 +27,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[LastInsertTime](
@@ -35,7 +35,7 @@ CREATE TABLE [dbo].[LastInsertTime](
 ) ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[IndexRebuildAudit](
@@ -54,7 +54,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[IndexFragmentationHistory](
@@ -81,7 +81,7 @@ CREATE TABLE [dbo].[IndexFragmentationHistory](
 ) ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[ImpactedObjects](
@@ -92,7 +92,7 @@ CREATE TABLE [dbo].[ImpactedObjects](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[ExecutionSummaryLog](
@@ -115,7 +115,7 @@ PRIMARY KEY NONCLUSTERED
 ) ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[ExecutionDetailsLog](
@@ -153,7 +153,7 @@ GO
 ALTER TABLE [dbo].[ExecutionDetailsLog] ADD  CONSTRAINT [DF_ExecutionDetailsLog_fecha]  DEFAULT (CONVERT([date],getdate())) FOR [fecha]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[DatabaseTableSpaceUsage](
@@ -179,7 +179,7 @@ ALTER TABLE [dbo].[DatabaseTableSpaceUsage]  WITH CHECK ADD FOREIGN KEY([Databas
 REFERENCES [dbo].[DatabaseSpaceUsage] ([ID])
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[DatabaseSpaceUsage](
@@ -202,7 +202,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[DatabaseAssessment](
@@ -216,7 +216,7 @@ CREATE TABLE [dbo].[DatabaseAssessment](
 ) ON [PRIMARY]
 GO
 
-USE [dbatools]
+USE [dbtools]
 GO
 
 CREATE TABLE [dbo].[ConfiguracionArchivos](
